@@ -29,9 +29,11 @@
   onDestroy(() => {
     window.removeEventListener("resize", measure);
   });
+  console.log({canvas});
 </script>
 
 <div>
+  
   <canvas
     bind:this={canvas}
     class="max-w-full"

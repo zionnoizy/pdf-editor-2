@@ -9,6 +9,7 @@ export async function save(pdfFile, objects, name) {
   let pdfDoc;
   try {
     pdfDoc = await PDFLib.PDFDocument.load(await readAsArrayBuffer(pdfFile));
+    console.log(pdfDoc);
   } catch (e) {
     console.log('Failed to load PDF.');
     throw e;

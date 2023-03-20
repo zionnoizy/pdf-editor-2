@@ -30,7 +30,8 @@
   // for test purpose
   onMount(async () => {
     try {
-      const res = await fetch("/test.pdf");
+      const res = await fetch("/empty_pdf/cms.pdf");
+      console.log("res:" + res);
       const pdfBlob = await res.blob();
       await addPDF(pdfBlob);
       selectedPageIndex = 0;
@@ -38,10 +39,7 @@
         fetchFont(currentFont);
         prepareAssets();
       }, 5000);
-      // const imgBlob = await (await fetch("/test.jpg")).blob();
-      // addImage(imgBlob);
-      // addTextField("測試!");
-      // addDrawing(200, 100, "M30,30 L100,50 L50,70", 0.5);
+      
     } catch (e) {
       console.log(e);
     }
@@ -60,6 +58,7 @@
   }
   async function addPDF(file) {
     try {
+      console.log("file" + file);
       const pdf = await readAsPDF(file);
       pdfName = file.name;
       pdfFile = file;
@@ -263,11 +262,7 @@
       class:bg-blue-700={pages.length === 0 || saving || !pdfFile}>
       {saving ? 'Saving' : 'Save'}
     </button>
-    <a href="https://github.com/ShizukuIchi/pdf-editor">
-      <img
-        src="/GitHub-Mark-32px.png"
-        alt="A GitHub icon leads to personal GitHub page" />
-    </a>
+
   </div>
   {#if addingDrawing}
     <div
