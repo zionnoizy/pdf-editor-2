@@ -127,11 +127,43 @@
       pIndex === selectedPageIndex ? [...objects, object] : objects
     );
   }
+
   function onAddDrawing() {
     if (selectedPageIndex >= 0) {
       addingDrawing = true;
     }
   }
+  function srcToFile(src, fileName, mimeType){
+    return (fetch(src)
+        .then(function(res){return res.arrayBuffer();})
+        .then(function(buf){return new File([buf], fileName, {type:mimeType});})
+    );
+  }
+  async function onAddDrawing2(e) { ///
+    srcToFile('/output-onlinepngtools.png', 'output-onlinepngtools.png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+  //
+  async function onAddDrawing3() {
+    srcToFile('/output-onlinepngtools(1).png', 'output-onlinepngtools(1).png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+
   function addDrawing(originWidth, originHeight, path, scale = 1) {
     const id = genID();
     const object = {
@@ -245,6 +277,25 @@
         class:bg-gray-500={selectedPageIndex < 0}>
         <img src="gesture.svg" alt="An icon for adding drawing" />
       </label>
+
+      <label
+        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
+        cursor-pointer"
+        on:click={onAddDrawing2}
+        class:cursor-not-allowed={selectedPageIndex < 0}
+        class:bg-gray-500={selectedPageIndex < 0}>
+        <img src="square.svg" alt="An icon for adding square" />
+      </label>
+      
+      <label
+        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
+        cursor-pointer"
+        on:click={onAddDrawing3}
+        class:cursor-not-allowed={selectedPageIndex < 0}
+        class:bg-gray-500={selectedPageIndex < 0}>
+        <img src="circle.svg" alt="An icon for adding circle" />
+      </label>
+
     </div>
     <div class="justify-center mr-3 md:mr-4 w-full max-w-xs hidden md:flex">
       <img src="/edit.svg" class="mr-2" alt="a pen, edit pdf name" />
