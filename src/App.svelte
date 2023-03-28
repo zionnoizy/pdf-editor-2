@@ -150,6 +150,10 @@
     .then(console.log)
     .catch(console.error);
   }
+
+  async function myFunction(e) { ///
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
   //
   async function onAddDrawing3() {
     srcToFile('/output-onlinepngtools(1).png', 'output-onlinepngtools(1).png', 'image/png')
@@ -249,8 +253,10 @@
       for="pdf">
       Choose PDF
     </label>
+
+
     <div
-      class="relative mr-3 flex h-8 bg-gray-400 rounded-sm overflow-hidden
+      class="relative mr-3 flex h-8 bg-gray-400 rounded-sm 
       md:mr-4">
       <label
         class="flex items-center justify-center h-full w-8 hover:bg-gray-500
@@ -278,15 +284,36 @@
         <img src="gesture.svg" alt="An icon for adding drawing" />
       </label>
 
-      <label
-        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
-        cursor-pointer"
-        on:click={onAddDrawing2}
-        class:cursor-not-allowed={selectedPageIndex < 0}
-        class:bg-gray-500={selectedPageIndex < 0}>
-        <img src="square.svg" alt="An icon for adding square" />
-      </label>
-      
+        <label
+          class="mysquare flex items-center justify-center h-full w-8 hover:bg-gray-500
+          cursor-pointer"
+          on:click={onAddDrawing2}
+          class:cursor-not-allowed={selectedPageIndex < 0}
+          class:bg-gray-500={selectedPageIndex < 0}>
+          <img src="square.svg" alt="An icon for adding square" />
+        </label>
+
+
+      <div class="mysquare_d">
+        <label
+          class="mysquare flex items-center justify-center h-full w-8 hover:bg-gray-500
+          cursor-pointer"
+          on:click={myFunction1}
+          class:cursor-not-allowed={selectedPageIndex < 0}
+          class:bg-gray-500={selectedPageIndex < 0}>
+          <img src="square.svg" alt="An icon for adding square" />
+        </label>
+
+        <div class="dropdown_square" style="  position: absolute; z-index:999;">
+          <ul style=" display: inline;">
+            <li class="relative  flex h-8" style="float: left; " > <img src="square.svg" alt="An icon for adding square" /> </li>
+            <li class="relative  flex h-8" style="float: left; "> <img src="square.svg" alt="An icon for adding square" /> </li>
+            <li class="relative  flex h-8" style="float: left; "> <img src="square.svg" alt="An icon for adding square" /> </li>
+          </ul>
+        </div>
+
+      </div>
+
       <label
         class="flex items-center justify-center h-full w-8 hover:bg-gray-500
         cursor-pointer"
