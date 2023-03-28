@@ -151,9 +151,7 @@
     .catch(console.error);
   }
 
-  async function myFunction(e) { ///
-    document.getElementById("myDropdown").classList.toggle("show");
-  }
+
   //
   async function onAddDrawing3() {
     srcToFile('/output-onlinepngtools(1).png', 'output-onlinepngtools(1).png', 'image/png')
@@ -167,7 +165,10 @@
     .then(console.log)
     .catch(console.error);
   }
-
+  async function myFunction1() {
+    document.getElementById("dropdown_square").classList.toggle("show");
+  }
+  
   function addDrawing(originWidth, originHeight, path, scale = 1) {
     const id = genID();
     const object = {
@@ -303,11 +304,11 @@
           class:bg-gray-500={selectedPageIndex < 0}>
           <img src="square.svg" alt="An icon for adding square" />
         </label>
-
-        <div class="dropdown_square" style="  position: absolute; z-index:999;">
+        <!--https://stackoverflow.com/questions/41615383/dropdown-html-file-download--> <!--display: none; -->
+        <div id="dropdown_square" style="  position: absolute; z-index:999; ">
           <ul style=" display: inline;">
-            <li class="relative  flex h-8" style="float: left; " > <img src="square.svg" alt="An icon for adding square" /> </li>
-            <li class="relative  flex h-8" style="float: left; "> <img src="square.svg" alt="An icon for adding square" /> </li>
+            <li class="relative  flex h-8" style="float: left; " > <img src="red_sq.png" alt="An icon for adding square" /> </li>
+            <li class="relative  flex h-8" style="float: left; "> <img src="green_sq.png" alt="An icon for adding square" /> </li>
             <li class="relative  flex h-8" style="float: left; "> <img src="square.svg" alt="An icon for adding square" /> </li>
           </ul>
         </div>
@@ -326,11 +327,14 @@
     </div>
     <div class="justify-center mr-3 md:mr-4 w-full max-w-xs hidden md:flex">
       <img src="/edit.svg" class="mr-2" alt="a pen, edit pdf name" />
+      
       <input
         placeholder="Rename your PDF here"
         type="text"
-        class="flex-grow bg-transparent"
+        class="flex-grow bg-transparent border border-light"
+        style="background-color: rgb(255, 255, 255); outline: none; border: 2px solid rgb(18, 103, 170); border-radius: 25px; height: 30px; text-align: center;"
         bind:value={pdfName} />
+
     </div>
     <button
       on:click={savePDF}
