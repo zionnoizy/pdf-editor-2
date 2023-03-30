@@ -16,6 +16,7 @@
   } from "./utils/asyncReader.js";
   import { ggID } from "./utils/helper.js";
   import { save } from "./utils/PDF.js";
+
   const genID = ggID();
   let pdfFile;
   let pdfName = "";
@@ -165,10 +166,21 @@
     .then(console.log)
     .catch(console.error);
   }
-  async function myFunction1() {
-    document.getElementById("dropdown_square").classList.toggle("show");
-  }
-  
+
+  window.onclick = function(event) {
+      if (!event.target.matches('.more_mysquare_btn')) {
+        var dropdowns = document.getElementsByClassName("dropdown_square");
+        var i;
+        for (i = 0; i < dropdowns.length; i++) {
+          var openDropdown = dropdowns[i];
+          if (openDropdown.classList.contains('show')) {
+            openDropdown.classList.remove('show');
+          }
+        }
+      }
+    }
+
+
   function addDrawing(originWidth, originHeight, path, scale = 1) {
     const id = genID();
     const object = {
@@ -235,7 +247,7 @@
 <main class="flex flex-col items-center py-16 bg-gray-100 min-h-screen">
   <div
     class="fixed z-10 top-0 left-0 right-0 h-12 flex justify-center items-center
-    bg-gray-200 border-b border-gray-300">
+    bg-gray-200 border-b border-gray-300 mt-5">
     <input
       type="file"
       name="pdf"
@@ -252,81 +264,12 @@
       class="whitespace-no-wrap bg-blue-500 hover:bg-blue-700 text-white
       font-bold py-1 px-3 md:px-4 rounded mr-3 cursor-pointer md:mr-4"
       for="pdf">
-      Choose PDF
+      OPEN
+      <img src="openpdf.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center h-full  w-8 cursor-pointer" />
     </label>
 
-
-    <div
-      class="relative mr-3 flex h-8 bg-gray-400 rounded-sm 
-      md:mr-4">
-      <label
-        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
-        cursor-pointer"
-        for="image"
-        class:cursor-not-allowed={selectedPageIndex < 0}
-        class:bg-gray-500={selectedPageIndex < 0}>
-        <img src="image.svg" alt="An icon for adding images" />
-      </label>
-      <label
-        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
-        cursor-pointer"
-        for="text"
-        class:cursor-not-allowed={selectedPageIndex < 0}
-        class:bg-gray-500={selectedPageIndex < 0}
-        on:click={onAddTextField}>
-        <img src="notes.svg" alt="An icon for adding text" />
-      </label>
-      <label
-        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
-        cursor-pointer"
-        on:click={onAddDrawing}
-        class:cursor-not-allowed={selectedPageIndex < 0}
-        class:bg-gray-500={selectedPageIndex < 0}>
-        <img src="gesture.svg" alt="An icon for adding drawing" />
-      </label>
-
-        <label
-          class="mysquare flex items-center justify-center h-full w-8 hover:bg-gray-500
-          cursor-pointer"
-          on:click={onAddDrawing2}
-          class:cursor-not-allowed={selectedPageIndex < 0}
-          class:bg-gray-500={selectedPageIndex < 0}>
-          <img src="square.svg" alt="An icon for adding square" />
-        </label>
-
-
-      <div class="mysquare_d">
-        <label
-          class="mysquare flex items-center justify-center h-full w-8 hover:bg-gray-500
-          cursor-pointer"
-          on:click={myFunction1}
-          class:cursor-not-allowed={selectedPageIndex < 0}
-          class:bg-gray-500={selectedPageIndex < 0}>
-          <img src="square.svg" alt="An icon for adding square" />
-        </label>
-        <!--https://stackoverflow.com/questions/41615383/dropdown-html-file-download--> <!--display: none; -->
-        <div id="dropdown_square" style="  position: absolute; z-index:999; ">
-          <ul style=" display: inline;">
-            <li class="relative  flex h-8" style="float: left; " > <img src="red_sq.png" alt="An icon for adding square" /> </li>
-            <li class="relative  flex h-8" style="float: left; "> <img src="green_sq.png" alt="An icon for adding square" /> </li>
-            <li class="relative  flex h-8" style="float: left; "> <img src="square.svg" alt="An icon for adding square" /> </li>
-          </ul>
-        </div>
-
-      </div>
-
-      <label
-        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
-        cursor-pointer"
-        on:click={onAddDrawing3}
-        class:cursor-not-allowed={selectedPageIndex < 0}
-        class:bg-gray-500={selectedPageIndex < 0}>
-        <img src="circle.svg" alt="An icon for adding circle" />
-      </label>
-
-    </div>
     <div class="justify-center mr-3 md:mr-4 w-full max-w-xs hidden md:flex">
-      <img src="/edit.svg" class="mr-2" alt="a pen, edit pdf name" />
+      
       
       <input
         placeholder="Rename your PDF here"
@@ -336,6 +279,75 @@
         bind:value={pdfName} />
 
     </div>
+
+    <div
+      class="relative mr-3 flex h-8 bg-gray-400 rounded-sm 
+      md:mr-4" style="border-radius: 25px;">
+      <label
+        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
+        cursor-pointer mx-1"
+        for="image"
+        class:cursor-not-allowed={selectedPageIndex < 0}
+        class:bg-gray-500={selectedPageIndex < 0}>
+        <img src="image.svg" alt="An icon for adding images" />
+      </label>
+      <label
+        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
+        cursor-pointer  mx-1"
+        for="text"
+        class:cursor-not-allowed={selectedPageIndex < 0}
+        class:bg-gray-500={selectedPageIndex < 0}
+        on:click={onAddTextField}>
+        <img src="text2.png" alt="An icon for adding text" />
+      </label>
+      <label
+        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
+        cursor-pointer  mx-1"
+        on:click={onAddDrawing}
+        class:cursor-not-allowed={selectedPageIndex < 0}
+        class:bg-gray-500={selectedPageIndex < 0}>
+        <img src="gesture.svg" alt="An icon for adding drawing" />
+      </label>
+
+      <div class="s_c">
+      <label
+        class="mysquare flex items-center justify-center h-full w-8 hover:bg-gray-500
+        cursor-pointer  mx-1"
+        on:click={onAddDrawing2}
+        class:cursor-not-allowed={selectedPageIndex < 0}
+        class:bg-gray-500={selectedPageIndex < 0}>
+        <img src="square.svg" alt="An icon for adding square" />
+
+        
+      </label>
+      <div id="" style="  position: absolute; z-index:999; " class="mt-1">
+        <ul style=" display: inline-block;">
+          <li class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="square_red2.png" alt="An icon for adding square" /> </li>
+          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_green2.png" alt="An icon for adding square" /> </li>
+          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_blue2.png" alt="An icon for adding square" /> </li>
+          <li class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="circle_red_2.png" alt="An icon for adding square" /> </li>
+          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_green_2.png" alt="An icon for adding square" /> </li>
+          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_blue_2.png" alt="An icon for adding square" /> </li>
+        </ul>
+      </div>
+      </div>
+
+
+
+
+
+
+      <label
+        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
+        cursor-pointer  mx-1"
+        on:click={onAddDrawing3}
+        class:cursor-not-allowed={selectedPageIndex < 0}
+        class:bg-gray-500={selectedPageIndex < 0}>
+        <img src="circle.svg" alt="An icon for adding circle" />
+      </label>
+
+    </div>
+    
     <button
       on:click={savePDF}
       class="w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3
@@ -343,8 +355,10 @@
       class:cursor-not-allowed={pages.length === 0 || saving || !pdfFile}
       class:bg-blue-700={pages.length === 0 || saving || !pdfFile}>
       {saving ? 'Saving' : 'Save'}
+      <img src="save.webp" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center h-full  w-8 cursor-pointer" />
     </button>
 
+    
   </div>
   {#if addingDrawing}
     <div
@@ -438,3 +452,7 @@
     </div>
   {/if}
 </main>
+
+<style>
+
+</style>
