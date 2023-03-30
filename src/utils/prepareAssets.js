@@ -46,11 +46,13 @@ export default function prepareAssets() {
 
 // out of the box fonts
 const fonts = {
+  /*
   Courier: {
     correction(size, lineHeight) {
       return (size * lineHeight - size) / 2 + size / 6;
     },
   },
+  */
   Helvetica: {
     correction(size, lineHeight) {
       return (size * lineHeight - size) / 2 + size / 10;
@@ -65,8 +67,20 @@ const fonts = {
 // Available fonts
 export const Fonts = {
   ...fonts,
-  標楷體: {
-    src: '/CK.ttf', // 9.9 MB
+  Signture1: {
+    src: '/BarokahSignaturebyAlifinartStudio.ttf', // 9.9 MB
+    correction(size, lineHeight) {
+      return (size * lineHeight - size) / 2;
+    },
+  },
+  Signture2: {
+    src: '/RochesterSignatureRegular.ttf', // 9.9 MB
+    correction(size, lineHeight) {
+      return (size * lineHeight - size) / 2;
+    },
+  },
+  Signture3: {
+    src: '/RochesterSignatureRegular.ttf', // 9.9 MB
     correction(size, lineHeight) {
       return (size * lineHeight - size) / 2;
     },

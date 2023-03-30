@@ -23,7 +23,7 @@
   let pages = [];
   let pagesScale = [];
   let allObjects = [];
-  let currentFont = "Times-Roman";
+  let currentFont = "Helvetica";
   let focusId = null;
   let selectedPageIndex = -1;
   let saving = false;
@@ -167,6 +167,84 @@
     .catch(console.error);
   }
 
+  async function onAddDrawingSR() {
+    srcToFile('/square_red2.png', 'square_red2.png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+
+  async function onAddDrawingSG() {
+    srcToFile('/square_green2.png', 'square_green2.png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+
+  async function onAddDrawingSB() {
+    srcToFile('/square_blue2.png', 'square_blue2.png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+
+  async function onAddDrawingCR() {
+    srcToFile('/circle_red_2.png', 'circle_red_2.png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+
+  async function onAddDrawingCG() {
+    srcToFile('/circle_green_2.png', 'circle_green_2.png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+
+  async function onAddDrawingCB() {
+    srcToFile('/circle_blue_2.png', 'circle_blue_2.png', 'image/png')
+    .then(function(file){
+      var fd = new FormData();
+      fd.append('file1', file);
+      console.log("[file object?]   " + file);
+      addImage(file);
+    
+    })
+    .then(console.log)
+    .catch(console.error);
+  }
+
   window.onclick = function(event) {
       if (!event.target.matches('.more_mysquare_btn')) {
         var dropdowns = document.getElementsByClassName("dropdown_square");
@@ -248,6 +326,9 @@
   <div
     class="fixed z-10 top-0 left-0 right-0 h-12 flex justify-center items-center
     bg-gray-200 border-b border-gray-300 mt-5">
+    
+    <img src="EzPzPDFicon.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center    w-16 cursor-pointer" />
+
     <input
       type="file"
       name="pdf"
@@ -260,7 +341,8 @@
       name="image"
       class="hidden"
       on:change={onUploadImage} />
-    <label
+    
+      <label
       class="whitespace-no-wrap bg-blue-500 hover:bg-blue-700 text-white
       font-bold py-1 px-3 md:px-4 rounded mr-3 cursor-pointer md:mr-4"
       for="pdf">
@@ -320,14 +402,14 @@
 
         
       </label>
-      <div id="" style="  position: absolute; z-index:999; " class="mt-1">
+      <div id="" style="  position: absolute; z-index:999; background-color:aquamarine;" class="mt-1">
         <ul style=" display: inline-block;">
-          <li class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="square_red2.png" alt="An icon for adding square" /> </li>
-          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_green2.png" alt="An icon for adding square" /> </li>
-          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_blue2.png" alt="An icon for adding square" /> </li>
-          <li class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="circle_red_2.png" alt="An icon for adding square" /> </li>
-          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_green_2.png" alt="An icon for adding square" /> </li>
-          <li class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_blue_2.png" alt="An icon for adding square" /> </li>
+          <li on:click={onAddDrawingSR} class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="square_red2.png" alt="An icon for adding square" /> </li>
+          <li on:click={onAddDrawingSG} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_green2.png" alt="An icon for adding square" /> </li>
+          <li on:click={onAddDrawingSB} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_blue2.png" alt="An icon for adding square" /> </li>
+          <li on:click={onAddDrawingCR} class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="circle_red_2.png" alt="An icon for adding square" /> </li>
+          <li on:click={onAddDrawingCG} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_green_2.png" alt="An icon for adding square" /> </li>
+          <li on:click={onAddDrawingCB} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_blue_2.png" alt="An icon for adding square" /> </li>
         </ul>
       </div>
       </div>
