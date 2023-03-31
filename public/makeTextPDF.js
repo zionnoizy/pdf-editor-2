@@ -9,20 +9,28 @@ window.makeTextPDF = async function makeTextPDF({
   height,
   font,
   dy,
+  fillColor,
 }) {
   const doc = new PDFDocument({
     margin: 0,
     size: [width, height],
   });
   const stream = doc.pipe(blobStream());
+  
+  
   doc.fontSize(fontSize);
+
+
+
   const contentHeight = fontSize * lineHeight;
   lines.forEach((line, index) => {
-    doc.font(font).text(line, 0, contentHeight * index + dy, {
+    //doc.fillColor(color);;
+    doc.font(font).fill(fillColor).text(line, 0, contentHeight * index + dy, {
       lineBreak: false,
     });
   });
   doc.end();
+  console.log("===============");
   return new Promise((res) => {
     stream.on('finish', function () {
       const blob = stream.toBlob('application/pdf');
@@ -59751,6 +59759,8 @@ var ColorMixin = {
   },
 
   fillColor(color, opacity) {
+
+    console.log("run fillColor   ");
     const set = this._setColor(color, false);
 
     if (set) {

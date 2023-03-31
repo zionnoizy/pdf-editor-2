@@ -40,9 +40,14 @@ export async function save(pdfFile, objects, name) {
           return noop;
         }
       } else if (object.type === 'text') {
-        let { x, y, lines, lineHeight, size, fontFamily, width } = object;
+        
+        let { x, y, lines, lineHeight, size, fontFamily, width, fillColor } = object;
+        
         const height = size * lineHeight * lines.length;
         const font = await fetchFont(fontFamily);
+
+        console.log ("save txt object?   " + fillColor);
+
         const [textPage] = await pdfDoc.embedPdf(
           await makeTextPDF({
             lines,
@@ -52,14 +57,23 @@ export async function save(pdfFile, objects, name) {
             height,
             font: font.buffer || fontFamily, // built-in font family
             dy: font.correction(size, lineHeight),
+            fillColor, //might return empty in this case.
           }),
         );
+        console.log("textPage?  " + textPage);
+
+        for( var index in textPage ){
+          var currentObject = textPage[ index ];
+          console.log("currentTXT?  " + index + ":   " + currentObject);
+        }
+
         return () =>
           page.drawPage(textPage, {
             width,
             height,
             x,
             y: pageHeight - y - height,
+            
           });
       } else if (object.type === 'drawing') {
         let { x, y, path, scale } = object;

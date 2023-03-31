@@ -110,7 +110,8 @@
       addTextField();
     }
   }
-  function addTextField(text = "New Text Field") {
+  function addTextField(text = "My Text Field") {
+
     const id = genID();
     fetchFont(currentFont);
     const object = {
@@ -122,11 +123,16 @@
       lineHeight: 1.4,
       fontFamily: currentFont,
       x: 0,
-      y: 0
+      y: 0,
+      fillColor: "rgb(0,0,0)",
+
     };
+    console.log("object?:   " + object);
     allObjects = allObjects.map((objects, pIndex) =>
+      
       pIndex === selectedPageIndex ? [...objects, object] : objects
     );
+
   }
 
   function onAddDrawing() {
@@ -306,7 +312,10 @@
   // FIXME: Should wait all objects finish their async work
   async function savePDF() {
     if (!pdfFile || saving || !pages.length) return;
+    console.log("allObjects?" + allObjects);
     saving = true;
+
+    
     try {
       await save(pdfFile, allObjects, pdfName, pagesScale);
     } catch (e) {
@@ -508,7 +517,10 @@
                     size={object.size}
                     lineHeight={object.lineHeight}
                     fontFamily={object.fontFamily}
-                    pageScale={pagesScale[pIndex]} />
+                    pageScale={pagesScale[pIndex]}
+                    fillColor={object.fillColor}
+                    />
+                    <!-- textColor={object.textColor}  -->
                 {:else if object.type === 'drawing'}
                   <Drawing
                     on:update={e => updateObject(object.id, e.detail)}

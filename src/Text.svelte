@@ -12,6 +12,8 @@
   export let y;
   export let fontFamily;
   export let pageScale = 1;
+  export let fillColor;
+
   const Families = Object.keys(Fonts);
   const dispatch = createEventDispatcher();
   let startX;
@@ -23,6 +25,8 @@
   let dx = 0;
   let dy = 0;
   let operation = "";
+  let _textColor = fillColor;
+
   function handlePanMove(event) {
     dx = (event.detail.x - startX) / pageScale;
     dy = (event.detail.y - startY) / pageScale;
@@ -44,9 +48,11 @@
     startX = event.detail.x;
     startY = event.detail.y;
     operation = "move";
+    console.log("moving? " );
   }
   function onFocus() {
     operation = "edit";
+    console.log("focus ");
   }
   async function onBlur() {
     if (operation !== "edit" || operation === "tool") return;
@@ -102,14 +108,19 @@
   }
   function onFocusTool() {
     operation = "tool";
+    console.log("onFoucs??");
   }
   async function onBlurTool() {
     if (operation !== "tool" || operation === "edit") return;
+    console.log("onBlur?");
+    console.log("updating textColor? " + _textColor);
     dispatch("update", {
       lines: extractLines(),
       lineHeight: _lineHeight,
       size: _size,
-      fontFamily: _fontFamily
+      fontFamily: _fontFamily,
+      fillColor: _textColor
+
     });
     operation = "";
   }
@@ -128,6 +139,24 @@
       name: _fontFamily
     });
   }
+
+
+  function onChangeColor1() {
+    //cb1e1e red
+    _textColor = "red";
+  }
+
+  function onChangeColor2() {
+    //1fa73f green
+    _textColor = "blue";
+  }
+
+  function onChangeColor3() {
+    //2126d5 blue
+    _textColor = "rgb(33, 38, 213)";
+  }
+
+
   function render() {
     editable.innerHTML = text;
     editable.focus();
@@ -183,6 +212,7 @@
           class="h-6 w-12 text-center flex-shrink-0 rounded-sm"
           bind:value={_lineHeight} />
       </div>
+
       <div class="mr-2 flex items-center">
         <img src="/text.svg" class="w-6 mr-2" alt="Font size" />
         <input
@@ -193,6 +223,41 @@
           class="h-6 w-12 text-center flex-shrink-0 rounded-sm"
           bind:value={_size} />
       </div>
+
+      <div class="mr-2 flex items-center">
+        <input
+        type="text"
+
+        class="h-6 w-12 text-center flex-shrink-0 rounded-sm"
+        bind:value={_textColor} />
+        
+        <img src="/square-128_red.png" class="w-6 mr-2" alt="Font size" 
+        :value={_textColor}
+        v-bind:value={_textColor}
+        on:click={onChangeColor1}
+        />
+        
+      </div>
+
+      <div class="mr-2 flex items-center">
+        <img src="/square-128_green.png" class="w-6 mr-2" alt="Font size" 
+        :value={_textColor}
+        v-bind:value={_textColor}
+        on:click={onChangeColor2}
+        />
+        
+      </div>
+
+      <div class="mr-2 flex items-center">
+        <img src="/square-128_blue.png" class="w-6 mr-2" alt="Font size" 
+        :value={_textColor}
+        v-bind:value={_textColor}
+        on:click={onChangeColor3}
+        />
+        
+      </div>
+
+
       <div class="mr-2 flex items-center">
         <img src="/text-family.svg" class="w-4 mr-2" alt="Font family" />
         <div class="relative w-32 md:w-40">
@@ -250,6 +315,7 @@
     spellcheck="false"
     class="outline-none whitespace-no-wrap"
     style="font-size: {_size}px; font-family: '{_fontFamily}', serif; 
-    line-height: {_lineHeight}; -webkit-user-select: text;" />
+    line-height: {_lineHeight}; -webkit-user-select: text; 
+    color: {_textColor};" />
     <!--  -->
   </div>
