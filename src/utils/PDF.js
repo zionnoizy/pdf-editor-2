@@ -6,7 +6,10 @@ export async function save(pdfFile, objects, name) {
   const PDFLib = await getAsset('PDFLib');
   const download = await getAsset('download');
   const makeTextPDF = await getAsset('makeTextPDF');
+
   let pdfDoc;
+
+  console.log("save objects?   " + objects);
   try {
     pdfDoc = await PDFLib.PDFDocument.load(await readAsArrayBuffer(pdfFile));
     console.log(pdfDoc);
@@ -45,11 +48,33 @@ export async function save(pdfFile, objects, name) {
         
         const height = size * lineHeight * lines.length;
         const font = await fetchFont(fontFamily);
-
+        const color = fillColor;
         console.log ("save txt object?   " + fillColor);
+        console.log ("save txt size?   " + size);
+
+        
+
+        
+        let what = await makeTextPDF({
+
+          lines,
+          fontSize: size,
+          lineHeight,
+          width,
+          height,
+          font: font.buffer || fontFamily, // built-in font family
+          dy: font.correction(size, lineHeight),
+          fillColor: color, //might return empty in this case.
+
+        });
+        var str = new TextDecoder().decode(what)
+        //var json = JSON.parse(str)
+        console.log("waht?" + str);
 
         const [textPage] = await pdfDoc.embedPdf(
+          
           await makeTextPDF({
+
             lines,
             fontSize: size,
             lineHeight,
@@ -58,15 +83,18 @@ export async function save(pdfFile, objects, name) {
             font: font.buffer || fontFamily, // built-in font family
             dy: font.correction(size, lineHeight),
             fillColor, //might return empty in this case.
+
           }),
+          
         );
-        console.log("textPage?  " + textPage);
+        console.log("makeTextPDF ends...   ")
+        console.log("textPage?  " + [textPage]);
 
         for( var index in textPage ){
           var currentObject = textPage[ index ];
           console.log("currentTXT?  " + index + ":   " + currentObject);
         }
-
+        
         return () =>
           page.drawPage(textPage, {
             width,

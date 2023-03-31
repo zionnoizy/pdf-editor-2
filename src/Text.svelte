@@ -109,6 +109,7 @@
   function onFocusTool() {
     operation = "tool";
     console.log("onFoucs??");
+    _textColor = "blue";
   }
   async function onBlurTool() {
     if (operation !== "tool" || operation === "edit") return;
@@ -119,8 +120,8 @@
       lineHeight: _lineHeight,
       size: _size,
       fontFamily: _fontFamily,
-      fillColor: _textColor
 
+      fillColor: _textColor
     });
     operation = "";
   }
@@ -143,17 +144,20 @@
 
   function onChangeColor1() {
     //cb1e1e red
-    _textColor = "red";
+    _textColor = "rgb(203, 30, 30)";
+      
   }
 
   function onChangeColor2() {
     //1fa73f green
     _textColor = "blue";
+    editable.color = "rgb(31, 167, 63)";
   }
 
   function onChangeColor3() {
     //2126d5 blue
     _textColor = "rgb(33, 38, 213)";
+    editable.color = "rgb(33, 38, 213)";
   }
 
 
@@ -230,7 +234,7 @@
 
         class="h-6 w-12 text-center flex-shrink-0 rounded-sm"
         bind:value={_textColor} />
-        
+
         <img src="/square-128_red.png" class="w-6 mr-2" alt="Font size" 
         :value={_textColor}
         v-bind:value={_textColor}
@@ -315,7 +319,6 @@
     spellcheck="false"
     class="outline-none whitespace-no-wrap"
     style="font-size: {_size}px; font-family: '{_fontFamily}', serif; 
-    line-height: {_lineHeight}; -webkit-user-select: text; 
-    color: {_textColor};" />
+    line-height: {_lineHeight}; -webkit-user-select: text; color: {_textColor};" />
     <!--  -->
   </div>
