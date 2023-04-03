@@ -4,7 +4,7 @@
   import { readAsArrayBuffer } from "./utils/asyncReader.js";
   export let payload;
   export let file;
-  export let width;
+  export let width; //cano cancel w/ aspect-ratio: 1 / 1;
   export let height;
   export let x;
   export let y;
@@ -33,7 +33,7 @@
       scale = Math.min(scale, limit / height);
     }
     dispatch("update", {
-      width: width * scale,
+      width: width * scale, //origional size
       height: height * scale
     });
     if (!["image/jpeg", "image/png"].includes(file.type)) {
@@ -58,9 +58,11 @@
       if (directions.includes("top")) {
         dy = _dy;
         dh = -_dy;
+        
       }
       if (directions.includes("right")) {
         dw = _dx;
+        console.log("moving right.");
       }
       if (directions.includes("bottom")) {
         dh = _dy;
@@ -74,15 +76,17 @@
         x: x + dx,
         y: y + dy
       });
+      console.log("moving?   ");
       dx = 0;
       dy = 0;
     } else if (operation === "scale") {
       dispatch("update", {
         x: x + dx,
-        y: y + dy,
-        width: width + dw,
-        height: height + dh
+        y: y + dy, 
+        width: height + dh, //do not update if comment
+        height: height + dh 
       });
+      console.log("[*]scale?   " + x + " / " + y + " / " + width + " / " + height + " / " + dw + " / " + dh); //width + height must same
       dx = 0;
       dy = 0;
       dw = 0;
@@ -117,12 +121,15 @@
     @apply absolute w-10 h-10 bg-blue-300 rounded-full;
   }
 </style>
+<!--{width + dw}-->
+<!-- {x + dx} -->
 
 <svelte:options immutable={true} />
 <div
   class="absolute left-0 top-0 select-none"
-  style="width: {width + dw}px; height: {height + dh}px; transform: translate({x + dx}px,
-  {y + dy}px);">
+  
+  style="width: {height + dh}px; height: {height + dh}px; transform: translate( {x + dx}px,
+  {y + dy}px); aspect-ratio: 1 / 1;">
 
   <div
     use:pannable
@@ -151,15 +158,15 @@
     <div
       data-direction="right-top"
       class="resize-corner right-0 top-0 cursor-nesw-resize transform
-      translate-x-1/2 -translate-y-1/2 md:scale-25" />
+      translate-x-1/2 -translate-y-1/2 md:scale-25  scale-28" />
     <div
       data-direction="left-bottom"
       class="resize-corner left-0 bottom-0 cursor-nesw-resize transform
-      -translate-x-1/2 translate-y-1/2 md:scale-25" />
+      -translate-x-1/2 translate-y-1/2 md:scale-25  scale-28" />
     <div
       data-direction="right-bottom"
       class="resize-corner right-0 bottom-0 cursor-nwse-resize transform
-      translate-x-1/2 translate-y-1/2 md:scale-25" />
+      translate-x-1/2 translate-y-1/2 md:scale-25  scale-28" />
   </div>
   <div
     on:click={onDelete}

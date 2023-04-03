@@ -345,7 +345,7 @@
 <Tailwind />
 <main class="flex flex-col items-center py-16 bg-gray-100 min-h-screen">
   <div
-    class="fixed z-10 top-0  rounded h-14 flex justify-center items-center
+    class="fixed z-10 top-0  rounded h-12 flex justify-center items-center
     bg-gray-200 border-b border-gray-300 mt-5" style="background-color: rgb(78 115 248);">
     
     <img src="EzPzPDFicon.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center    w-16 cursor-pointer mr-5 mx-2" />
@@ -381,7 +381,7 @@
 
     </label>
 
-    <div class="justify-center mr-3 md:mr-4 w-full max-w-xs hidden md:flex">
+    <div class="justify-center mx-3  md:mr-4 w-full max-w-xs hidden md:flex">
       
       
       <input
@@ -464,15 +464,15 @@
     <button
       on:click={savePDF}
       class="w-40 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3
-      md:px-4 mx-3 md:mr-4 rounded" style="background-color: #fff; border-radius: 16px;"
+      md:px-4 mx-3 md:mr-4 rounded" style="background-color: #fff;;width : 40%; border-radius: 16px;"
       class:cursor-not-allowed={pages.length === 0 || saving || !pdfFile}
       class:bg-blue-700={pages.length === 0 || saving || !pdfFile}>
-      <div class="grid grid-cols-2 gap2">
+      <div class="grid grid-cols-2 gap-2">
       <div class=" " style="color:#6688f8;  ">
-      {saving ? 'SAVING...' : 'SAVE'}
+        {saving ? 'SAVING...' : 'SAVE'}
       </div>
       <div>
-      <img src="save.webp" alt="An icon for adding square" style="display: flex; color: #ffffff; " class="flex items-center justify-center h-full  w-8 cursor-pointer" />
+        <img src="save.webp" alt="An icon for adding square" style="display: flex; color: #ffffff; " class="flex items-center justify-center h-full  w-8 cursor-pointer" />
       </div>
     </div>
     </button>
