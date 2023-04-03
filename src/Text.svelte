@@ -25,7 +25,7 @@
   let dx = 0;
   let dy = 0;
   let operation = "";
-  let _textColor = fillColor;
+  let _fillColor = fillColor;
 
   function handlePanMove(event) {
     dx = (event.detail.x - startX) / pageScale;
@@ -109,13 +109,13 @@
   function onFocusTool() {
     operation = "tool";
     console.log("onFoucs??");
-    //_textColor = "blue";
+    //_fillColor = "blue";
   }
   async function onBlurTool() {
     if (operation !== "tool" || operation === "edit") return;
 
     console.log("onBlur?");
-    console.log("updating textColor? " + _textColor);
+    console.log("updating textColor? " + _fillColor);
 
     dispatch("update", {
       lines: extractLines(),
@@ -123,7 +123,7 @@
       size: _size,
       fontFamily: _fontFamily,
 
-      fillColor: _textColor
+      fillColor: _fillColor
     });
     operation = "";
   }
@@ -145,11 +145,12 @@
 
 
   function onChangeColor1() {
-    //cb1e1e red
-    _textColor = "rgb(203, 30, 30)";
+    //cb1e1e red #C00  (203, 30, 30)
+    _fillColor = "#C00";
+    
     dispatch("selectColor",{
 
-      fillColor : _textColor
+      fillColor : _fillColor
 
     });
     
@@ -158,13 +159,13 @@
 
   function onChangeColor2() {
     //1fa73f green
-    _textColor = "rgb(31, 167, 63)"; //
+    _fillColor = "rgb(31, 167, 63)"; //
     editable.color = "rgb(31, 167, 63)";
   }
 
   function onChangeColor3() {
     //2126d5 blue
-    _textColor = "rgb(33, 38, 213)";
+    _fillColor = "rgb(33, 38, 213)";
     editable.color = "rgb(33, 38, 213)";
   }
 
@@ -240,8 +241,8 @@
         
 
         <img src="/square-128_red.png" class="w-6 mr-2" alt="Font size" 
-        :value={_textColor}
-        v-bind:value={_textColor}
+        :value={_fillColor}
+        v-bind:value={_fillColor}
         on:click={onChangeColor1}
         />
         
@@ -249,8 +250,8 @@
 
       <div class="mr-2 flex items-center">
         <img src="/square-128_green.png" class="w-6 mr-2" alt="Font size" 
-        :value={_textColor}
-        v-bind:value={_textColor}
+        :value={_fillColor}
+        v-bind:value={_fillColor}
         on:click={onChangeColor2}
         />
         
@@ -258,8 +259,8 @@
 
       <div class="mr-2 flex items-center">
         <img src="/square-128_blue.png" class="w-6 mr-2" alt="Font size" 
-        :value={_textColor}
-        v-bind:value={_textColor}
+        :value={_fillColor}
+        v-bind:value={_fillColor}
         on:click={onChangeColor3}
         />
         
@@ -323,6 +324,6 @@
     spellcheck="false"
     class="outline-none whitespace-no-wrap"
     style="font-size: {_size}px; font-family: '{_fontFamily}', serif; 
-    line-height: {_lineHeight}; -webkit-user-select: text; color: {_textColor};" />
+    line-height: {_lineHeight}; -webkit-user-select: text; color: {_fillColor};" />
     <!--  -->
   </div>

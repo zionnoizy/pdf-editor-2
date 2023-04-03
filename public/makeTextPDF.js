@@ -40,7 +40,7 @@ window.makeTextPDF = async function makeTextPDF({
   doc.fontSize(fontSize);
   
   //
-  doc.fillColor(fillColor);
+  doc.fillColor(fillColor, 1.2);
 
   const contentHeight = fontSize * lineHeight;
   lines.forEach((line, index) => {
@@ -59719,6 +59719,7 @@ var ColorMixin = {
   },
 
   _normalizeColor(color) {
+    console.log( "rrn normalize color   " + color);
     if (color instanceof PDFGradient$1) {
       return color;
     }
@@ -59727,6 +59728,7 @@ var ColorMixin = {
       if (color.charAt(0) === '#') {
         if (color.length === 4) {
           color = color.replace(/#([0-9A-F])([0-9A-F])([0-9A-F])/i, '#$1$1$2$2$3$3');
+          console.log("string color now." + color);
         }
 
         const hex = parseInt(color.slice(1), 16);
@@ -59734,14 +59736,17 @@ var ColorMixin = {
       } else if (namedColors[color]) {
         color = namedColors[color];
       }
+      return color;
     }
 
-    if (Array.isArray(color)) {
+    else if (Array.isArray(color)) {
       // RGB
       if (color.length === 3) {
         color = color.map(part => part / 255); // CMYK
+        console.log("color length is 3    " + color);
       } else if (color.length === 4) {
         color = color.map(part => part / 100);
+        console.log("color length is 4");
       }
 
       return color;
@@ -59753,6 +59758,7 @@ var ColorMixin = {
   _setColor(color, stroke) {
     color = this._normalizeColor(color);
 
+    console.log("_setCOlor " + color);
     if (!color) {
       return false;
     }
@@ -59782,16 +59788,21 @@ var ColorMixin = {
 
   fillColor(color, opacity) {
 
-    console.log("run fillColor   ");
+    console.log("run fillColor   " + opacity + " / " + color);
     const set = this._setColor(color, false);
 
+    console.log("set?" + set);
     if (set) {
       this.fillOpacity(opacity);
     } // save this for text wrapper, which needs to reset
     // the fill color on new pages
+    else{
+      console.log("no opacity." + opacity);
+    }
 
 
     this._fillColor = [color, opacity];
+    console.log("return this. " + this);
     return this;
   },
 
@@ -60660,6 +60671,7 @@ var VectorMixin = {
     }
 
     if (color) {
+      console.log("fill() function.");
       this.fillColor(color);
     }
 

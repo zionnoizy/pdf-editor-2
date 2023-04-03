@@ -111,7 +111,7 @@
       addTextField();
     }
   }
-  function addTextField(text = "My Text Field") {
+  function addTextField(text = "[Modify & Move Text Here]") {
 
     const id = genID();
     fetchFont(currentFont);
@@ -126,7 +126,7 @@
       fontFamily: currentFont,
       x: 0,
       y: 0,
-      fillColor: "rgb(0,0,0)",
+      fillColor: "#000",
 
     };
     console.log("object?:   " + object);
@@ -532,10 +532,10 @@
                     pageScale={pagesScale[pIndex]}
                     
                     on:selectColor={selectColor}
-                    fillColor={object.fillColor}
+                    
 
                     />
-                    <!-- fillColor={object.fillColor}  -->
+                    <!-- fillColor={object.fillColor} on:selectColor={selectColor}  -->
                 {:else if object.type === 'drawing'}
                   <Drawing
                     on:update={e => updateObject(object.id, e.detail)}
