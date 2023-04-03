@@ -89,6 +89,7 @@ export const Fonts = {
 };
 
 export function fetchFont(name) {
+  
   if (fonts[name]) return fonts[name];
   const font = Fonts[name];
   if (!font) throw new Error(`Font '${name}' not exists.`);

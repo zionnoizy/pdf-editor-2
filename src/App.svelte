@@ -24,6 +24,7 @@
   let pagesScale = [];
   let allObjects = [];
   let currentFont = "Helvetica";
+  let currentColor = "";
   let focusId = null;
   let selectedPageIndex = -1;
   let saving = false;
@@ -115,6 +116,7 @@
     const id = genID();
     fetchFont(currentFont);
     const object = {
+
       id,
       text,
       type: "text",
@@ -287,6 +289,16 @@
     fetchFont(name);
     currentFont = name;
   }
+
+  function selectColor(event) {
+    const fillColor = event.detail.fillColor;
+
+    console.log( "SelectCOlor?   " + fillColor );
+
+    //currentColor = "rgb(0,0,0)";
+  }
+
+
   function selectPage(index) {
     selectedPageIndex = index;
   }
@@ -518,9 +530,12 @@
                     lineHeight={object.lineHeight}
                     fontFamily={object.fontFamily}
                     pageScale={pagesScale[pIndex]}
+                    
+                    on:selectColor={selectColor}
                     fillColor={object.fillColor}
+
                     />
-                    <!-- textColor={object.textColor}  -->
+                    <!-- fillColor={object.fillColor}  -->
                 {:else if object.type === 'drawing'}
                   <Drawing
                     on:update={e => updateObject(object.id, e.detail)}

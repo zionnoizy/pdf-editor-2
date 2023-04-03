@@ -109,12 +109,14 @@
   function onFocusTool() {
     operation = "tool";
     console.log("onFoucs??");
-    _textColor = "blue";
+    //_textColor = "blue";
   }
   async function onBlurTool() {
     if (operation !== "tool" || operation === "edit") return;
+
     console.log("onBlur?");
     console.log("updating textColor? " + _textColor);
+
     dispatch("update", {
       lines: extractLines(),
       lineHeight: _lineHeight,
@@ -145,12 +147,18 @@
   function onChangeColor1() {
     //cb1e1e red
     _textColor = "rgb(203, 30, 30)";
+    dispatch("selectColor",{
+
+      fillColor : _textColor
+
+    });
+    
       
   }
 
   function onChangeColor2() {
     //1fa73f green
-    _textColor = "blue";
+    _textColor = "rgb(31, 167, 63)"; //
     editable.color = "rgb(31, 167, 63)";
   }
 
@@ -229,11 +237,7 @@
       </div>
 
       <div class="mr-2 flex items-center">
-        <input
-        type="text"
-
-        class="h-6 w-12 text-center flex-shrink-0 rounded-sm"
-        bind:value={_textColor} />
+        
 
         <img src="/square-128_red.png" class="w-6 mr-2" alt="Font size" 
         :value={_textColor}

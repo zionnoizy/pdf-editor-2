@@ -45,11 +45,17 @@ export async function save(pdfFile, objects, name) {
       } else if (object.type === 'text') {
         
         let { x, y, lines, lineHeight, size, fontFamily, width, fillColor } = object;
-        
+
         const height = size * lineHeight * lines.length;
+
         const font = await fetchFont(fontFamily);
-        const color = fillColor;
-        console.log ("save txt object?   " + fillColor);
+        
+        console.log("size * lineHeight * lines.length =    " + size + "*" + lineHeight + "*" + lines.length);
+
+
+        console.log("font?     " + font);                  //[object Object]
+        console.log("height?     " + height);              //22.4
+        console.log ("save txt object?   " + fillColor);   
         console.log ("save txt size?   " + size);
 
         
@@ -64,12 +70,12 @@ export async function save(pdfFile, objects, name) {
           height,
           font: font.buffer || fontFamily, // built-in font family
           dy: font.correction(size, lineHeight),
-          fillColor: color, //might return empty in this case.
+          fillColor: fillColor, //might return empty in this case.
 
         });
         var str = new TextDecoder().decode(what)
         //var json = JSON.parse(str)
-        console.log("waht?" + str);
+        console.log("waht?    " + str);
 
         const [textPage] = await pdfDoc.embedPdf(
           
@@ -78,11 +84,13 @@ export async function save(pdfFile, objects, name) {
             lines,
             fontSize: size,
             lineHeight,
+
             width,
             height,
+
             font: font.buffer || fontFamily, // built-in font family
             dy: font.correction(size, lineHeight),
-            fillColor, //might return empty in this case.
+            fillColor: fillColor, //might return empty in this case.
 
           }),
           
