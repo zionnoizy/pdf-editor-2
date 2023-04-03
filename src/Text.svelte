@@ -214,7 +214,7 @@
       on:mousedown={onFocusTool}
       on:touchstart={onFocusTool}
       class="h-full flex justify-center items-center bg-gray-300 border-b
-      border-gray-400">
+      border-gray-400 mt-5">
       <div class="mr-2 flex items-center">
         <img src="/line_height.svg" class="w-6 mr-2" alt="Line height" />
         <input

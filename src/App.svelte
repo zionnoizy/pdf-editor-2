@@ -149,7 +149,7 @@
     );
   }
   async function onAddDrawing2(e) { ///
-    srcToFile('/output-onlinepngtools.png', 'output-onlinepngtools.png', 'image/png')
+    srcToFile('/square_black_1.png', 'square_black_1.png', 'image/png')
     .then(function(file){
       var fd = new FormData();
       fd.append('file1', file);
@@ -163,7 +163,7 @@
 
   //
   async function onAddDrawing3() {
-    srcToFile('/output-onlinepngtools(1).png', 'output-onlinepngtools(1).png', 'image/png')
+    srcToFile('/circle_black_2.png', 'circle_black_2.png', 'image/png')
     .then(function(file){
       var fd = new FormData();
       fd.append('file1', file);
@@ -388,7 +388,7 @@
         placeholder="Rename your PDF here"
         type="text"
         class="flex-grow bg-transparent border border-light"
-        style="background-color: #fff; outline: none; border: 2px solid rgb(18, 103, 170); border-radius: 25px; height: 30px; text-align: center;"
+        style="background-color: #fff; outline: none; border: 2px solid rgb(18, 103, 170);  height: 30px; text-align: center;"
         bind:value={pdfName} />
 
     </div>
