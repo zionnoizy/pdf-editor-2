@@ -345,10 +345,10 @@
 <Tailwind />
 <main class="flex flex-col items-center py-16 bg-gray-100 min-h-screen">
   <div
-    class="fixed z-10 top-0 left-0 right-0 h-12 flex justify-center items-center
-    bg-gray-200 border-b border-gray-300 mt-5">
+    class="fixed z-10 top-0  rounded h-14 flex justify-center items-center
+    bg-gray-200 border-b border-gray-300 mt-5" style="background-color: rgb(78 115 248);">
     
-    <img src="EzPzPDFicon.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center    w-16 cursor-pointer" />
+    <img src="EzPzPDFicon.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center    w-16 cursor-pointer mr-5 mx-2" />
 
     <input
       type="file"
@@ -364,11 +364,21 @@
       on:change={onUploadImage} />
     
       <label
-      class="whitespace-no-wrap bg-blue-500 hover:bg-blue-700 text-white
-      font-bold py-1 px-3 md:px-4 rounded mr-3 cursor-pointer md:mr-4"
-      for="pdf">
-      OPEN
-      <img src="openpdf.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center h-full  w-8 cursor-pointer" />
+      class="whitespace-no-wrap bg-blue-500 hover:bg-blue-700 
+      font-bold py-1 px-3 md:px-4 rounded-pill mr-3 cursor-pointer md:mr-4  text-center"
+      for="pdf" style="background-color: #fff;;width : 40%; border-radius: 16px;">
+      <div class="grid grid-cols-2 gap-2">
+        <div>
+        <p style="color:#6688f8; text-align: center;;">
+          OPEN
+          
+        </p>
+        </div>
+        <div>
+          <img src="openpdf.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center h-full  w-8 cursor-pointer" />
+        </div>
+      </div>
+
     </label>
 
     <div class="justify-center mr-3 md:mr-4 w-full max-w-xs hidden md:flex">
@@ -378,14 +388,14 @@
         placeholder="Rename your PDF here"
         type="text"
         class="flex-grow bg-transparent border border-light"
-        style="background-color: rgb(255, 255, 255); outline: none; border: 2px solid rgb(18, 103, 170); border-radius: 25px; height: 30px; text-align: center;"
+        style="background-color: #fff; outline: none; border: 2px solid rgb(18, 103, 170); border-radius: 25px; height: 30px; text-align: center;"
         bind:value={pdfName} />
 
     </div>
 
     <div
       class="relative mr-3 flex h-8 bg-gray-400 rounded-sm 
-      md:mr-4" style="border-radius: 25px;">
+      md:mr-4" style="border-radius: 25px; background-color: #fff;">
       <label
         class="flex items-center justify-center h-full w-8 hover:bg-gray-500
         cursor-pointer mx-1"
@@ -453,12 +463,18 @@
     
     <button
       on:click={savePDF}
-      class="w-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3
-      md:px-4 mr-3 md:mr-4 rounded"
+      class="w-40 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3
+      md:px-4 mx-3 md:mr-4 rounded" style="background-color: #fff; border-radius: 16px;"
       class:cursor-not-allowed={pages.length === 0 || saving || !pdfFile}
       class:bg-blue-700={pages.length === 0 || saving || !pdfFile}>
-      {saving ? 'Saving' : 'Save'}
-      <img src="save.webp" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center h-full  w-8 cursor-pointer" />
+      <div class="grid grid-cols-2 gap2">
+      <div class=" " style="color:#6688f8;  ">
+      {saving ? 'SAVING...' : 'SAVE'}
+      </div>
+      <div>
+      <img src="save.webp" alt="An icon for adding square" style="display: flex; color: #ffffff; " class="flex items-center justify-center h-full  w-8 cursor-pointer" />
+      </div>
+    </div>
     </button>
 
     
