@@ -46,14 +46,28 @@ export async function save(pdfFile, objects, name) {
         
         let { x, y, lines, lineHeight, size, fontFamily, width, fillColor } = object;
 
+        if (fontFamily == "Signture1"){
+          console.log("saving signature1 ... " + lineHeight);
+          console.log( "lineHeight * 3 " + typeof lineHeight + "* 3 " );
+          lineHeight += +lineHeight * +5;
+          console.log( "lineHeight * 3 " + typeof lineHeight + "* 3 = " + lineHeight);
+          
+        }
+        if (fontFamily == "Signture2"){
+          console.log("saving signature1 ... " + lineHeight);
+          console.log( "lineHeight * 3 " + typeof lineHeight + "* 3 " );
+          lineHeight += +lineHeight * +3;
+          console.log( "lineHeight * 3 " + typeof lineHeight + "* 3 = " + lineHeight);
+          
+        }
         const height = size * lineHeight * lines.length;
 
         const font = await fetchFont(fontFamily);
         
         console.log("size * lineHeight * lines.length =    " + size + "*" + lineHeight + "*" + lines.length);
 
-
-        console.log("font?     " + font);                  //[object Object]
+        
+        console.log("font?     " + fontFamily);                  //[object Object]
         console.log("height?     " + height);              //22.4
         console.log ("save txt object?   " + fillColor);   
         console.log ("save txt size?   " + size);

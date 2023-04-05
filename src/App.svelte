@@ -8,6 +8,7 @@
   import Drawing from "./Drawing.svelte";
   import DrawingCanvas from "./DrawingCanvas.svelte";
   import prepareAssets, { fetchFont } from "./utils/prepareAssets.js";
+  import { tick } from 'svelte';
   import {
     readAsArrayBuffer,
     readAsImage,
@@ -29,7 +30,10 @@
   let selectedPageIndex = -1;
   let saving = false;
   let addingDrawing = false;
+
   // for test purpose
+  let show = false;
+  let dropdownElement;
   onMount(async () => {
     try {
       const res = await fetch("/empty_pdf/cms.pdf");
@@ -299,6 +303,21 @@
   }
 
 
+  async function showSquareCircle(event) {
+    console.log("run showSquareCircle " + show);
+
+    show = !show;
+
+    console.log("now show is " + show);
+
+    //we need to wait with tick, until DOM nodes have mounted
+    await tick();
+    dropdownElement.focus()
+
+  }
+
+  
+
   function selectPage(index) {
     selectedPageIndex = index;
   }
@@ -345,7 +364,7 @@
 <Tailwind />
 <main class="flex flex-col items-center py-16 bg-gray-100 min-h-screen">
   <div
-    class="fixed z-10 top-0  rounded h-12 flex justify-center items-center
+    class="fixed z-10 top-0  rounded-lg h-12 flex justify-center items-center
     bg-gray-200 border-b border-gray-300 mt-5" style="background-color: rgb(78 115 248);">
     
     <img src="EzPzPDFicon.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center    w-16 cursor-pointer mr-5 mx-2" />
@@ -356,6 +375,7 @@
       id="pdf"
       on:change={onUploadPDF}
       class="hidden" />
+
     <input
       type="file"
       id="image"
@@ -365,21 +385,21 @@
     
       <label
       class="whitespace-no-wrap bg-blue-500 hover:bg-blue-700 
-      font-bold py-1 px-3 md:px-4 rounded-pill mr-3 cursor-pointer md:mr-4  text-center"
+      font-bold py-1 px-3 md:px-4 rounded-pill mr-3 cursor-pointer md:mr-4 cursor-pointer  text-center"
       for="pdf" style="background-color: #fff;;width : 40%; border-radius: 16px;">
+      
       <div class="grid grid-cols-2 gap-2">
         <div>
-        <p style="color:#6688f8; text-align: center;;">
-          OPEN
-          
+        <p style="color:#6688f8; text-align: center;; display: inline-block;">
+          OPEN 
         </p>
         </div>
         <div>
-          <img src="openpdf.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center h-full  w-8 cursor-pointer" />
+          <img src="openpdf.png" alt="An icon for adding square" style="display: flex;" class="flex items-center justify-center h-full mx-2  w-8 cursor-pointer" />
         </div>
       </div>
 
-    </label>
+      </label>
 
     <div class="justify-center mx-3  md:mr-4 w-full max-w-xs hidden md:flex">
       
@@ -394,10 +414,11 @@
     </div>
 
     <div
-      class="relative mr-3 flex h-8 bg-gray-400 rounded-sm 
+      
+      class="  relative mr-3 flex h-8 bg-gray-400 rounded-sm 
       md:mr-4" style="border-radius: 25px; background-color: #fff;">
       <label
-        class="flex items-center justify-center h-full w-8 hover:bg-gray-500
+        class="flex items-center justify-center h-full w-8 
         cursor-pointer mx-1"
         for="image"
         class:cursor-not-allowed={selectedPageIndex < 0}
@@ -415,64 +436,161 @@
       </label>
       <label
         class="flex items-center justify-center h-full w-8 hover:bg-gray-500
-        cursor-pointer  mx-1"
+        cursor-pointer ml-1  mr-2"
         on:click={onAddDrawing}
         class:cursor-not-allowed={selectedPageIndex < 0}
         class:bg-gray-500={selectedPageIndex < 0}>
         <img src="gesture.svg" alt="An icon for adding drawing" />
       </label>
 
-      <div class="s_c">
-      <label
-        class="mysquare flex items-center justify-center h-full w-8 hover:bg-gray-500
-        cursor-pointer  mx-1"
-        on:click={onAddDrawing2}
-        class:cursor-not-allowed={selectedPageIndex < 0}
-        class:bg-gray-500={selectedPageIndex < 0}>
-        <img src="square.svg" alt="An icon for adding square" />
+      <!--hover:hover:bg-gray-500-->
+      <div class="s_c w-16 cursor-pointer  ">
+        <label
+          class="mysquare flex items-center justify-center h-full w-8 ml-3 mr-2 
+          cursor-pointer  "  
+          on:click={showSquareCircle}
+          
+          class:cursor-not-allowed={selectedPageIndex < 0}
+          class:bg-gray-500={selectedPageIndex < 0}>
+          <img src="square_circle_2.png" alt="An icon for adding square" style="display: inline-block; border-radius: 8px;"/>
+
+          <img src="down.png" alt="An icon for adding square" style="scale:0.6;" />
+        </label>
 
         
-      </label>
-      <div id="" style="  position: absolute; z-index:999; background-color:aquamarine;" class="mt-1">
-        <ul style=" display: inline-block;">
-          <li on:click={onAddDrawingSR} class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="square_red2.png" alt="An icon for adding square" /> </li>
-          <li on:click={onAddDrawingSG} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_green2.png" alt="An icon for adding square" /> </li>
-          <li on:click={onAddDrawingSB} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_blue2.png" alt="An icon for adding square" /> </li>
-          <li on:click={onAddDrawingCR} class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="circle_red_2.png" alt="An icon for adding square" /> </li>
-          <li on:click={onAddDrawingCG} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_green_2.png" alt="An icon for adding square" /> </li>
-          <li on:click={onAddDrawingCB} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_blue_2.png" alt="An icon for adding square" /> </li>
-        </ul>
+        {#if show}
+
+          <div 
+            class=" relative mt-3 flex h-8 bg-gray-400 rounded-sm 
+            md:mr-4"   style="  position: absolute; z-index:999; background-color: white; border-radius: 16px;  left: -40px; border: 5px solid rgb(78 115 248);; " 
+            on:blur={() => show = false}
+
+            bind:this={dropdownElement}
+            >
+
+
+           
+            <!-- <ul style=" display: inline-block;  "> -->
+
+              <div on:click={onAddDrawingSR} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+                <img src="square.svg" alt="An icon for adding square" />
+              </div>
+
+              
+
+
+
+
+            <div on:click={onAddDrawingSR} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <img src="square_red2.png" alt="An icon for adding square" />
+            </div>
+
+
+            <div on:click={onAddDrawingSG} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <img src="square_green2.png" alt="An icon for adding square" />
+            </div>
+
+            
+            <div on:click={onAddDrawingSB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <img src="square_blue2.png" alt="An icon for adding square" />
+            </div>
+
+            <div on:click={onAddDrawing3} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <img src="circle.svg" alt="An icon for adding circle" />
+            </div>
+
+
+            <div on:click={onAddDrawingCR} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <img src="circle_red_2.png" alt="An icon for adding square" />
+            </div>
+
+            
+            <div on:click={onAddDrawingCG} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <img src="circle_green_2.png" alt="An icon for adding square" />
+            </div>
+
+            
+            <div on:click={onAddDrawingCB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <img src="circle_blue_2.png" alt="An icon for adding square" />
+            </div>
+          
+          </div>
+        {/if}
+      
       </div>
-      </div>
+        <!-- <div class="relative mt-1 grid grid-cols-8 gap-1 w-32" id="" style="  position: absolute; z-index:999; background-color:aquamarine; border-radius: 16px;" >
+          <ul style=" display: inline-block;  ">
+
+          <div on:click={onAddDrawingSR} class="relative  flex h-8  my-1 mx-1 w-8" style="float: left; " >
+            <img src="square_red2.png" alt="An icon for adding square" />
+          </div>
+
+          <div on:click={onAddDrawingSR} class="relative  flex h-8  my-1 mx-1 w-8" style="float: left; " >
+            <img src="square_red2.png" alt="An icon for adding square" />
+          </div>
+
+          <div on:click={onAddDrawingSR} class="relative  flex h-8  my-1 mx-1 w-8" style="float: left; " >
+            <img src="square_red2.png" alt="An icon for adding square" />
+          </div>
+
+          <div on:click={onAddDrawingSR} class="relative  flex h-8  my-1 mx-1 w-8" style="float: left; " >
+            <img src="square_red2.png" alt="An icon for adding square" />
+          </div>
+
+          <div>
+            <li on:click={onAddDrawingSG} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_green2.png" alt="An icon for adding square" /> </li>
+          </div>
+          <div>
+            <li on:click={onAddDrawingSB} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="square_blue2.png" alt="An icon for adding square" /> </li>
+          </div>
+          <div>
+            <li on:click={onAddDrawingCR} class="relative  flex h-8  my-1 mx-1" style="float: left; " > <img src="circle_red_2.png" alt="An icon for adding square" /> </li>
+          </div>
+          <div>
+            <li on:click={onAddDrawingCG} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_green_2.png" alt="An icon for adding square" /> </li>
+          </div>
+          <div>
+            <li on:click={onAddDrawingCB} class="relative  flex h-8  my-1 mx-1" style="float: left; "> <img src="circle_blue_2.png" alt="An icon for adding square" /> </li>
+          </div>
+
+            </ul>
+        </div> -->
+      
 
 
 
 
 
 
-      <label
+      <!-- <label
         class="flex items-center justify-center h-full w-8 hover:bg-gray-500
         cursor-pointer  mx-1"
         on:click={onAddDrawing3}
         class:cursor-not-allowed={selectedPageIndex < 0}
         class:bg-gray-500={selectedPageIndex < 0}>
         <img src="circle.svg" alt="An icon for adding circle" />
-      </label>
+      </label> -->
 
     </div>
     
+    
+
     <button
       on:click={savePDF}
       class="w-40 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-3
-      md:px-4 mx-3 md:mr-4 rounded" style="background-color: #fff;;width : 40%; border-radius: 16px;"
+      md:px-4 mx-3 md:mr-4 rounded-pill text-center cursor-pointer " style="background-color: #fff;;width : 40%; border-radius: 16px;"
       class:cursor-not-allowed={pages.length === 0 || saving || !pdfFile}
       class:bg-blue-700={pages.length === 0 || saving || !pdfFile}>
       <div class="grid grid-cols-2 gap-2">
-      <div class=" " style="color:#6688f8;  ">
-        {saving ? 'SAVING...' : 'SAVE'}
+      <div class=" "  >
+        <p style="color:#6688f8; text-align: center;; display: inline-block;">
+          {saving ? 'SAVING...' : 'SAVE'} 
+        </p>
+
+        <!-- {saving ? 'SAVING...' : 'SAVE'} -->
       </div>
       <div>
-        <img src="save.webp" alt="An icon for adding square" style="display: flex; color: #ffffff; " class="flex items-center justify-center h-full  w-8 cursor-pointer" />
+        <img src="save.png" alt="An icon for adding square" style="display: flex; color: #ffffff; " class="flex items-center justify-center h-full mx-2 w-8 cursor-pointer" />
       </div>
     </div>
     </button>
@@ -510,7 +628,7 @@
     <div class="w-full">
       {#each pages as page, pIndex (page)}
         <div
-          class="p-5 w-full flex flex-col items-center overflow-hidden"
+          class="p-10 w-full flex flex-col items-center overflow-hidden"
           on:mousedown={() => selectPage(pIndex)}
           on:touchstart={() => selectPage(pIndex)}>
           <div
@@ -579,5 +697,16 @@
 </main>
 
 <style>
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
 
+.show {
+  display:block;
+}
 </style>

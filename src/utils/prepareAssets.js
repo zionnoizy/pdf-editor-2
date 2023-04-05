@@ -80,12 +80,7 @@ export const Fonts = {
       return (size * lineHeight - size) / 2;
     },
   },
-  Signture3: {
-    src: '/RochesterSignatureRegular.ttf', // 9.9 MB
-    correction(size, lineHeight) {
-      return (size * lineHeight - size) / 2;
-    },
-  },
+  
 };
 
 export function fetchFont(name) {

@@ -116,7 +116,7 @@
 
     console.log("onBlur?");
     console.log("updating textColor? " + _fillColor);
-
+    
     dispatch("update", {
       lines: extractLines(),
       lineHeight: _lineHeight,
