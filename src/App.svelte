@@ -445,6 +445,7 @@
 
       <!--hover:hover:bg-gray-500-->
       <div class="s_c w-16 cursor-pointer  ">
+
         <label
           class="mysquare flex items-center justify-center h-full w-8 ml-3 mr-2 
           cursor-pointer  "  
@@ -472,7 +473,7 @@
            
             <!-- <ul style=" display: inline-block;  "> -->
 
-              <div on:click={onAddDrawingSR} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
+              <div on:click={onAddDrawing2} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
                 <img src="square.svg" alt="An icon for adding square" />
               </div>
 
