@@ -474,7 +474,7 @@
            
             <!-- <ul style=" display: inline-block;  "> -->
 
-              <div on:click={onAddDrawing2} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;" >
+              <div on:click={onAddDrawing2} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.65;" >
                 <img src="square.png" alt="An icon for adding square" />
               </div>
 
@@ -483,36 +483,36 @@
 
 
 
-            <div on:click={onAddDrawingSR} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;" >
+            <div on:click={onAddDrawingSR} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.65;" >
               <img src="square_logo_red2.png" alt="An icon for adding square" />
             </div>
 
 
-            <div on:click={onAddDrawingSG} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;" >
+            <div on:click={onAddDrawingSG} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.65;" >
               <img src="square_logo_green.png" alt="An icon for adding square" />
             </div>
 
             
-            <div on:click={onAddDrawingSB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;" >
+            <div on:click={onAddDrawingSB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.65;" >
               <img src="square_logo_blue.png" alt="An icon for adding square" />
             </div>
 
-            <div on:click={onAddDrawing3} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;;" >
+            <div on:click={onAddDrawing3} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.65;;" >
               <img src="circle.png" alt="An icon for adding circle" />
             </div>
 
 
-            <div on:click={onAddDrawingCR} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;;" >
+            <div on:click={onAddDrawingCR} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.65;;" >
               <img src="circle_icon_red.png" alt="An icon for adding square" />
             </div>
 
             
-            <div on:click={onAddDrawingCG} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;;" >
+            <div on:click={onAddDrawingCG} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.65;;" >
               <img src="circle_icon_green.png" alt="An icon for adding square" />
             </div>
 
             
-            <div on:click={onAddDrawingCB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;;" >
+            <div on:click={onAddDrawingCB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.65;;" >
               <img src="circle_icon_blue.png" alt="An icon for adding square" />
             </div>
           

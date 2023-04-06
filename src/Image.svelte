@@ -15,6 +15,7 @@
   let canvas;
   let operation = "";
   let directions = [];
+  let direction = "";
   let dx = 0;
   let dy = 0;
   let dw = 0;
@@ -71,6 +72,9 @@
   }
 
   function handlePanEnd(event) {
+    
+
+    console.log("direction? " + directions);
     if (operation === "move") {
       dispatch("update", {
         x: x + dx,
@@ -79,13 +83,35 @@
       console.log("moving?   ");
       dx = 0;
       dy = 0;
-    } else if (operation === "scale") {
-      dispatch("update", {
-        x: x + dx,
-        y: y + dy, 
-        width: height + dh, //do not update if comment
-        height: height + dh 
-      });
+    } 
+    else if (operation === "scale") {
+      if (directions == "left"){
+        console.log("left?");
+          dispatch("update", {
+          x: x + dx,
+          y: y + dy, 
+          width: width + dw, //do not update if comment
+          height: height + dh 
+        });
+      }
+      else if (directions == "right"){
+        console.log("right?");
+          dispatch("update", {
+          x: x + dx,
+          y: y + dy, 
+          width: width + dw, //do not update if comment
+          height: height + dh 
+        });
+      }
+      else{
+          dispatch("update", {
+          x: x + dx,
+          y: y + dy, 
+          width: height + dh, //do not update if comment
+          height: height + dh 
+        });
+      }
+      
       console.log("[*]scale?   " + x + " / " + y + " / " + width + " / " + height + " / " + dw + " / " + dh); //width + height must same
       dx = 0;
       dy = 0;
@@ -103,6 +129,7 @@
     }
     operation = "scale";
     directions = event.detail.target.dataset.direction.split("-");
+    console.log("directions ..? " + directions);
   }
   function onDelete() {
     dispatch("delete");
@@ -128,7 +155,7 @@
 <div
   class="absolute left-0 top-0 select-none"
   
-  style="width: {height + dh}px; height: {height + dh}px; transform: translate( {x + dx}px,
+  style="width: {width + dw}px; height: {height + dh}px; transform: translate( {x + dx}px,
   {y + dy}px); aspect-ratio: 1 / 1;">
 
   <div
@@ -141,22 +168,28 @@
     class:operation>
     <div
       data-direction="left"
+
       class="resize-border h-full w-1 left-0 top-0 border-l cursor-ew-resize" />
     <div
       data-direction="top"
+
       class="resize-border w-full h-1 left-0 top-0 border-t cursor-ns-resize" />
     <div
       data-direction="bottom"
+
       class="resize-border w-full h-1 left-0 bottom-0 border-b cursor-ns-resize" />
     <div
       data-direction="right"
+
       class="resize-border h-full w-1 right-0 top-0 border-r cursor-ew-resize" />
     <div
       data-direction="left-top"
+      id="a"
       class="resize-corner left-0 top-0 cursor-nwse-resize transform
       -translate-x-1/2 -translate-y-1/2 md:scale-25" />
     <div
       data-direction="right-top"
+      id="a"
       class="resize-corner right-0 top-0 cursor-nesw-resize transform
       translate-x-1/2 -translate-y-1/2 md:scale-25  scale-28" />
     <div

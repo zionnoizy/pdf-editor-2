@@ -30,6 +30,7 @@
       dy = _dy;
     } else if (operation === "scale") {
       if (direction === "left-top") {
+        
         let d = Infinity;
         d = Math.min(_dx, _dy * ratio);
         dx = d;
