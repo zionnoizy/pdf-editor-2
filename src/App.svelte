@@ -429,6 +429,7 @@
         class="flex items-center justify-center h-full w-8 hover:bg-gray-500
         cursor-pointer  mx-1"
         for="text"
+        style="scale: 0.75;"
         class:cursor-not-allowed={selectedPageIndex < 0}
         class:bg-gray-500={selectedPageIndex < 0}
         on:click={onAddTextField}>
@@ -463,7 +464,7 @@
 
           <div 
             class=" relative mt-3 flex h-8 bg-gray-400 rounded-sm 
-            md:mr-4"   style="  position: absolute; z-index:999; background-color: white; border-radius: 16px;  left: -40px; border: 5px solid rgb(78 115 248);; " 
+            md:mr-4"   style="  position: absolute; z-index:999; background-color: white; border-radius: 16px;;  left: -105px; border: 5px solid rgb(78 115 248);; scale: 1.1;" 
             on:blur={() => show = false}
 
             bind:this={dropdownElement}
@@ -473,8 +474,8 @@
            
             <!-- <ul style=" display: inline-block;  "> -->
 
-              <div on:click={onAddDrawing2} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-                <img src="square.svg" alt="An icon for adding square" />
+              <div on:click={onAddDrawing2} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;" >
+                <img src="square.png" alt="An icon for adding square" />
               </div>
 
               
@@ -482,37 +483,37 @@
 
 
 
-            <div on:click={onAddDrawingSR} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-              <img src="square_red2.png" alt="An icon for adding square" />
+            <div on:click={onAddDrawingSR} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;" >
+              <img src="square_logo_red2.png" alt="An icon for adding square" />
             </div>
 
 
-            <div on:click={onAddDrawingSG} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-              <img src="square_green2.png" alt="An icon for adding square" />
-            </div>
-
-            
-            <div on:click={onAddDrawingSB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-              <img src="square_blue2.png" alt="An icon for adding square" />
-            </div>
-
-            <div on:click={onAddDrawing3} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-              <img src="circle.svg" alt="An icon for adding circle" />
-            </div>
-
-
-            <div on:click={onAddDrawingCR} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-              <img src="circle_red_2.png" alt="An icon for adding square" />
+            <div on:click={onAddDrawingSG} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;" >
+              <img src="square_logo_green.png" alt="An icon for adding square" />
             </div>
 
             
-            <div on:click={onAddDrawingCG} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-              <img src="circle_green_2.png" alt="An icon for adding square" />
+            <div on:click={onAddDrawingSB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;" >
+              <img src="square_logo_blue.png" alt="An icon for adding square" />
+            </div>
+
+            <div on:click={onAddDrawing3} class=" flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;;" >
+              <img src="circle.png" alt="An icon for adding circle" />
+            </div>
+
+
+            <div on:click={onAddDrawingCR} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;;" >
+              <img src="circle_icon_red.png" alt="An icon for adding square" />
             </div>
 
             
-            <div on:click={onAddDrawingCB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; " >
-              <img src="circle_blue_2.png" alt="An icon for adding square" />
+            <div on:click={onAddDrawingCG} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right; scale: 0.75;;" >
+              <img src="circle_icon_green.png" alt="An icon for adding square" />
+            </div>
+
+            
+            <div on:click={onAddDrawingCB} class="flex items-center justify-center h-full cursor-pointer mx-1 w-8" style="float: right;  scale: 0.75;;" >
+              <img src="circle_icon_blue.png" alt="An icon for adding square" />
             </div>
           
           </div>
@@ -628,8 +629,9 @@
     </div>
     <div class="w-full">
       {#each pages as page, pIndex (page)}
+
         <div
-          class="p-10 w-full flex flex-col items-center overflow-hidden"
+          class="p-10 mt-3 w-full flex flex-col items-center overflow-hidden"
           on:mousedown={() => selectPage(pIndex)}
           on:touchstart={() => selectPage(pIndex)}>
           <div
@@ -637,7 +639,8 @@
             class:shadow-outline={pIndex === selectedPageIndex}>
             <PDFPage
               on:measure={e => onMeasure(e.detail.scale, pIndex)}
-              {page} />
+              {page} 
+            />
             <div
               class="absolute top-0 left-0 transform origin-top-left"
               style="transform: scale({pagesScale[pIndex]}); touch-action: none;">
